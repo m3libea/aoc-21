@@ -29,7 +29,8 @@ if __name__ == '__main__':
     directions = advent.parse_input("input", parse_line)
     horizontal, depth, aim = get_position(directions)
 
-    #Part 1: What do you get if you multiply your final horizontal position by your final depth?
+    #Part 1: What do you get if you multiply your final horizontal position by your final depth? 
+    #On this case aim = depth
     advent.print_answer(1, horizontal * aim)
 
     #Part 2: What do you get if you multiply your final horizontal position by your final depth? (with Aim)
