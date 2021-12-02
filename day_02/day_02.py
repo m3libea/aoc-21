@@ -9,19 +9,18 @@ def parse_line(line):
     return [split[0], int(split[1])]
 
 def get_position(directions):
-    horizontal = 0
-    depth = 0
-    aim = 0
+    horizontal, depth, aim = 0, 0 ,0
 
-    for move in directions:
-        match move[0]:
+    for command, value in directions:
+        match command:
             case "forward":
-                horizontal += move[1]
-                depth += move[1] * aim 
+                horizontal += value
+                depth += value * aim 
             case "down":
-                aim += move[1] 
+                aim += value
             case "up":
-                aim -= move[1]
+                aim -= value
+
     return horizontal, depth, aim
 
 if __name__ == '__main__':
