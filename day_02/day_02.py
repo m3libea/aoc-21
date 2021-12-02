@@ -33,4 +33,5 @@ if __name__ == '__main__':
 
     total = position[0] * position[1]
 
+    #Part 1: What do you get if you multiply your final horizontal position by your final depth?
     advent.print_answer(1, total)
