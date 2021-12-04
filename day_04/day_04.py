@@ -25,8 +25,10 @@ def parse_input(input):
 
     return random_numbers, boards
 
+#First == True if you want the first board result, False otherwise
 def play_game(random_numbers, boards, first):
  
+    #Keep position of the first and the last board to win
     min_pos = len(random_numbers)
     min_remaining = 0
     min_winning = 0
@@ -45,8 +47,6 @@ def play_game(random_numbers, boards, first):
                     min_pos = i 
                     min_remaining = board.calculate_remaining_sum()
                     min_winning = num
-                    # print(min_pos)
-                    # print(i)
                 if i > max_pos:
                     max_pos = i
                     max_remaining = board.calculate_remaining_sum()
