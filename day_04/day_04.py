@@ -47,18 +47,17 @@ def play_game(random_numbers, boards, first):
             if len(winning_remaining) == len(boards):
                 all_winners = True
                 break 
-    
-    position = 0 if first else (len(winning_remaining) - 1)
 
+    position = 0 if first else (len(winning_remaining) - 1)
     return winning_num[position], winning_remaining[position]
 
 if __name__ == '__main__':
 
-    random_numbers, boards = parse_input("example")
+    random_numbers, boards = parse_input("input")
 
     winning_num, remaining = play_game(random_numbers, boards, True)
     advent.print_answer(1, winning_num * remaining)
 
-    random_numbers2, boards2 = parse_input("example")
+    random_numbers2, boards2 = parse_input("input")
     winning_num2, remaining2 = play_game(random_numbers2, boards2, False)
     advent.print_answer(2, winning_num2 * remaining2)

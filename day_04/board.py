@@ -1,17 +1,17 @@
 class Board:
     def __init__(self):
         self.totalnums = set()
-        self.rows = [ set() ] * 5
-        self.columns = [ set() ] * 5 
+        self.rows = []
+        self.columns = [set() for i in range(5)]
         self.total = 0
 
     def add_numbers(self, numbers):
-        for i in range(5):
-            self.totalnums.update(numbers[i])
-            self.rows[i] = numbers[i]
+        for row in numbers:
+            self.totalnums.update(row)
+            self.rows.append(set(row))
 
-            for n in numbers[i]:
-                self.columns[i].add(n)
+            for i in range(5):
+                self.columns[i].add(row[i])
 
     def play_num(self, num) -> bool:
         winner = False
