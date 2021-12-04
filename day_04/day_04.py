@@ -26,35 +26,41 @@ def parse_input(input):
     return random_numbers, boards
 
 def play_game(random_numbers, boards, first):
+ 
+    min_pos = len(random_numbers)
+    min_remaining = 0
+    min_winning = 0
 
-    winning_remaining = []
-    winning_num = []
+    max_pos = 0
+    max_remaining = 0
+    max_winning = 0
 
-    winners = set()
-
-    all_winners = False
-    for num in random_numbers:
-        #for board in boards:
-        for i in range(len(boards)):
-            board = boards[i]
+    for board in boards:
+        for i in range(len(random_numbers)):
+            num = random_numbers[i]
             winner = board.play_num(num)
 
-            if winner and i not in winners:
-                winning_remaining.append(board.calculate_remaining_sum())
-                winning_num.append(num)
-                winners.add(i)
+            if winner:
+                if i < min_pos:
+                    min_pos = i 
+                    min_remaining = board.calculate_remaining_sum()
+                    min_winning = num
+                    # print(min_pos)
+                    # print(i)
+                if i > max_pos:
+                    max_pos = i
+                    max_remaining = board.calculate_remaining_sum()
+                    max_winning = num
+                break
 
-            if len(winning_remaining) == len(boards):
-                all_winners = True
-                break 
-
-    position = 0 if first else (len(winning_remaining) - 1)
-    return winning_num[position], winning_remaining[position]
+    if first:
+        return min_winning, min_remaining
+    else:
+        return max_winning, max_remaining
 
 if __name__ == '__main__':
 
     random_numbers, boards = parse_input("input")
-
     winning_num, remaining = play_game(random_numbers, boards, True)
     advent.print_answer(1, winning_num * remaining)
 
