@@ -15,10 +15,8 @@ def parse_line(line):
     end = [int(num) for num in split[1].split(",")]
 
     return Line(start, end)
-
-# def calculate_overlap(lines, diagonal):
     
-def count_overlapping_points(lines, diagonals: bool = False):
+def calculate_overlap(lines, diagonals):
   grid = defaultdict(int)
   
   for line in lines:
@@ -48,9 +46,9 @@ def count_overlapping_points(lines, diagonals: bool = False):
 if __name__ == '__main__':
     lines = advent.parse_input("input", parse_line)
 
-    part1 = count_overlapping_points(lines, False)
+    part1 = calculate_overlap(lines, False)
     advent.print_answer(1, part1)
 
-    part2 = count_overlapping_points(lines, True)
+    part2 = calculate_overlap(lines, True)
     advent.print_answer(2, part2)
     
