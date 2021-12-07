@@ -21,7 +21,9 @@ def fish_after_days(initial_list, n):
         for k in range(1,9):
             lives[k-1] = lives[k]
         
+        #regenerate
         lives[6] += aux
+        #new life
         lives[8] = aux
 
     return sum(fishes for fishes in lives)
@@ -31,7 +33,10 @@ if __name__ == '__main__':
 
     example = "3,4,3,1,2"
 
-    line = parse_line(example)
-    num = fish_after_days(line, 80)
+    fishes = advent.parse_input("input", parse_line)
 
-    advent.print_answer(1, num)
+    part_one = fish_after_days(fishes[0], 80)
+    advent.print_answer(1, part_one)
+
+    part_two = fish_after_days(fishes[0], 256)
+    advent.print_answer(2, part_two)
