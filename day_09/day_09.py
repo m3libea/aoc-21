@@ -8,7 +8,7 @@ from utils import advent
 
 from functools import reduce
 
-#COMMON
+#global vars
 visited = set()
 grid = []
 n, m = 0, 0
