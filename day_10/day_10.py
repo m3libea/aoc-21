@@ -2,6 +2,7 @@
 
 import sys
 import pathlib
+import math
 
 sys.path.append(str(pathlib.Path(__file__).resolve().parent.parent))
 from utils import advent
@@ -20,6 +21,13 @@ error_score = {
     "]" : 57,
     "}" : 1197,
     ">" : 25137
+}
+
+incomplete_score = {
+    ")" : 1,
+    "]" : 2,
+    "}" : 3,
+    ">" : 4
 }
 
 def parse_line(line):
@@ -42,24 +50,41 @@ def classify_lines(input):
                     corrupted.append(s)
                     corrupted_line = True
                     break
-        
-        if not corrupted and not stack.isEmpty():
-            incomplete.append(i)
+        if not corrupted_line and not stack.isEmpty():
+            incomplete.append(stack.items)
     return corrupted, incomplete
             
-def calculate_score(corrupted):
+def calculate_corrupted_score(corrupted):
     total = 0
 
     for symbol in corrupted:
         total += error_score[symbol]
     return total
 
+def calculate_incomplete_score(incomplete):
+    scores = []
+
+    for stack in incomplete:
+        total = 0
+
+        for s in stack:
+            total = total * 5 + incomplete_score[symbols[s]]
+        scores.append(total)
+    
+    scores = sorted(scores)
+    return scores[math.floor(len(scores)/2)]
+
 if __name__ == '__main__':
 
     lines_example = advent.parse_input("example", parse_line)
-    corrupted_e, incomplete_e = classify_lines(lines_example)    
+    corrupted_e, incomplete_e = classify_lines(lines_example) 
 
     lines = advent.parse_input("input", parse_line)
 
     corrupted, incomplete = classify_lines(lines)    
-    advent.print_answer(1, calculate_score(corrupted))
+    advent.print_answer(1, calculate_corrupted_score(corrupted))
+
+    advent.print_answer(2,calculate_incomplete_score(incomplete))
+
+
+    
