@@ -8,3 +8,9 @@ def parse_input(input, parse_line):
     with open(input, 'r') as file:
         lines = [parse_line(line) for line in file.readlines()]
     return lines
+
+def print_grid(grid):
+    print("-" * len(grid) * 3)
+    for line in grid:
+        print(line)
+    print("-" * len(grid) * 3)
