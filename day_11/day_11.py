@@ -24,6 +24,20 @@ def calculate_flashes(steps):
                 flashes += dfs(i,j)
     return flashes
 
+def calculate_synchronized_step():
+    synchronized = False
+    total = n * m
+    step = 0
+    while not synchronized:
+        flashed.clear()
+        for i in range(n):
+            for j in range(m):
+                dfs(i,j)
+        if len(flashed) == total:
+            synchronized = True
+        step +=1
+    return step
+
 def dfs(row, col):
     if grid[row][col] == 0 and (row, col) in flashed:
         return 0
@@ -52,4 +66,9 @@ if __name__ == '__main__':
 
     flashes = calculate_flashes(100)
     advent.print_answer(1, flashes)
+    advent.print_grid(grid)
+
+    grid = advent.parse_input("input", parse_line)
+    step = calculate_synchronized_step()
+    advent.print_answer(2, step)
     advent.print_grid(grid)
